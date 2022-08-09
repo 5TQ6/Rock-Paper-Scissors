@@ -1,0 +1,42 @@
+body {
+    background-color: #3FA796;
+}
+
+.selections {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px ;
+}
+
+.selection {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 100ms;
+}
+
+.selection:hover {
+    transform: scale(1.2);
+}
+
+.results {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+    font-size: 3rem;
+    margin-top: 1rem;
+    color: #FEC260;
+    -webkit-text-stroke: 2px #2A0944;
+    font-family: fantasy ;
+}
+
+.result-score {
+    margin-left: .1rem;
+    font-size: 1.3rem;
+    -webkit-text-stroke: 0px;
+    color: #f0d5aa;
+}
