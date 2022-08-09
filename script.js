@@ -1,57 +1,62 @@
-// function getComputerChoice() {
-//     const choices = ["rock", "paper", "scissors"]
-//     var index = Math.floor(Math.random()*3)
-//     return choices[index];
-// }
+const selectionButtons = document.querySelectorAll('[data-selection]')
+const finalColumn = document.querySelector('[data-final-column]')
+const computerScoreSpan = document.querySelector('[data-computer-score]')
+const yourScoreSpan = document.querySelector('[data-your-score]')
+const SELECTIONS = [
+  {
+    name: 'rock',
+    emoji: '<img src="pictures/rock.png" height ="110" width="140" alt="Rock">',
+    beats: 'scissors'
+  },
+  {
+    name: 'paper',
+    emoji: '<img src="pictures/paper.png" height ="110" width="140" alt="Paper">',
+    beats: 'rock'
+  },
+  {
+    name: 'scissors',
+    emoji: '<img src="pictures/scissor.png" height ="110" width="140" alt="Scissor">',
+    beats: 'paper'
+  }
+]
 
-// var humanScore = 0;
-// var computerScore = 0;
+selectionButtons.forEach(selectionButton => {
+  selectionButton.addEventListener('click', e => {
+    const selectionName = selectionButton.dataset.selection
+    const selection = SELECTIONS.find(selection => selection.name === selectionName)
+    makeSelection(selection)
+  })
+})
 
-// function declareWinner(computerSelection,playerSelection) {
-//         if (computerSelection === playerSelection)
-//         {
-//             console.log("Tie")
-//             humanScore++;
-//             computerScore++;
-//         }
-//         else if (computerSelection == "rock" && playerSelection == "scissors" || computerSelection == "paper" && playerSelection == "rock" || computerSelection == "scissors" && playerSelection == "paper" )
-//         {
-//             console.log("computer")
-//             console.log(computerSelection, "beats" ,playerSelection)
-//             computerScore++;
-//         }
-//         else 
-//         {
-//             console.log("Human")
-//             console.log(playerSelection, "beats", computerSelection)
-//             humanScore++;
-//         }
-// }
+function makeSelection(selection) {
+  const computerSelection = randomSelection()
+  const yourWinner = isWinner(selection, computerSelection)
+  const computerWinner = isWinner(computerSelection, selection)
 
-// function game() {
-//     for(let i = 0; i < 5; i++)
-//     {
-//         var computerSelection = getComputerChoice();
-//         var playerSelection = prompt('Choose your weapon:')
-//         playerSelection = playerSelection.toLowerCase();
-//         console.log(playerSelection)
-//         console.log(computerSelection)
-//         declareWinner(computerSelection,playerSelection)
-//         document.write("Human:", humanScore," Computer:", computerScore)
-//        rock
-//     }
-//     if (humanScore == computerScore)
-//     {
-//         document.write("Tie score")
-//     }
-//     else if (humanScore > computerScore)
-//     {
-//         document.write("Human score win")
-//     }
-//     else 
-//     {document.write("Computer score win")}
-// }
+  addSelectionResult(computerSelection, computerWinner)
+  addSelectionResult(selection, yourWinner)
 
-// game()
+  if (yourWinner) incrementScore(yourScoreSpan)
+  if (computerWinner) incrementScore(computerScoreSpan)
+}
 
+function incrementScore(scoreSpan) {
+  scoreSpan.innerText = parseInt(scoreSpan.innerText) + 1
+}
 
+function addSelectionResult(selection, winner) {
+  const div = document.createElement('div')
+  div.innerHTML = selection.emoji
+  div.classList.add('result-selection')
+  if (winner) div.classList.add('winner')
+  finalColumn.after(div)
+}
+
+function isWinner(selection, opponentSelection) {
+  return selection.beats === opponentSelection.name
+}
+
+function randomSelection() {
+  const randomIndex = Math.floor(Math.random() * SELECTIONS.length)
+  return SELECTIONS[randomIndex]
+}

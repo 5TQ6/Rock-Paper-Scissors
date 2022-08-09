@@ -40,3 +40,12 @@ body {
     -webkit-text-stroke: 0px;
     color: #f0d5aa;
 }
+
+.result-selection {
+    opacity: .5;
+}
+
+.result-selection.winner {
+    opacity: 1;
+    font-size: 3.6rem; /*the winner is indicated with bigger icon
+}

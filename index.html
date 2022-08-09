@@ -9,9 +9,9 @@
 </head>
 <body>
     <div class="selections">
-    <button class="selection"><img src="pictures/rock.png" height ="110" width="140" alt="Rock"></button>
-    <button class="selection"><img src="pictures/paper.png" height ="110" width="140" alt="Paper"></button>
-    <button class="selection"><img src="pictures/scissor.png" height ="110" width="140" alt="Scissor"></button>
+    <button class="selection" data-selection="rock"><img src="pictures/rock.png" height ="110" width="140" alt="Rock"></button>
+    <button class="selection" data-selection="paper"><img src="pictures/paper.png" height ="110" width="140" alt="Paper"></button>
+    <button class="selection" data-selection="scissors"><img src="pictures/scissor.png" height ="110" width="140" alt="Scissor"></button>
     </div>
 
     <div class="results">
@@ -19,12 +19,12 @@
             You
             <span class="result-score">0</span>
         </div>
-        <div>
+        <div data-final-column>
             Computer
             <span class="result-score">0</span>
         </div>
-        <div class="result-selection winner">😝</div>
-        <div class="result-selection ">😊</div>
+        <!-- <div class="result-selection winner">😝</div>
+        <div class="result-selection ">😊</div> -->
     </div>
 
     <script src="script.js"></script>
